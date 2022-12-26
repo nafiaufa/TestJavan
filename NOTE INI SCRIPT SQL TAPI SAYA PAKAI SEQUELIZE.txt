@@ -1,0 +1,28 @@
+
+
+CREATE TABLE KeluargaBesar (
+  id_keluarga_besar INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  nama_keluarga_besar VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE KeluargaKecil (
+  id_keluarga_kecil INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  nama_keluarga_kecil VARCHAR(255) NOT NULL,
+  id_keluarga_besar INT(11) NOT NULL,
+  FOREIGN KEY (id_keluarga_besar) REFERENCES KeluargaBesar(id_keluarga_besar)
+);
+
+CREATE TABLE AnggotaKeluarga (
+  id_anggota INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  nama_anggota VARCHAR(255) NOT NULL,
+  id_keluarga_kecil INT(11) NOT NULL,
+  FOREIGN KEY (id_keluarga_kecil) REFERENCES KeluargaKecil(id_keluarga_kecil)
+);
+
+CREATE TABLE Aset (
+  id_aset INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  nama_aset VARCHAR(255),
+  id_anggota INT(11) NOT NULL,
+  FOREIGN KEY (id_anggota) REFERENCES AnggotaKeluarga(id_anggota)
+);
+
